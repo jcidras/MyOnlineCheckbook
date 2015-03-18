@@ -1,0 +1,55 @@
+﻿@model OnlineCheckbook.Models.User
+@using OnlineCheckbook.Models
+@{
+    ViewBag.Title = "Account";
+}
+
+<div class="col-md-4">
+    <h4>Account Info</h4>
+    <div>
+        Account : @Html.DisplayFor(modelItem => modelItem.Username)
+    </div>    
+    @Html.ActionLink("Edit?", "Edit", "Home")
+</div>
+
+@using (Html.BeginForm("Create", "Bank", FormMethod.Get))
+{ 
+    <input type="submit" class="btn btn-default" value="Add Bank" />
+}
+
+<div class="col-md-4">
+    <h4>Banks</h4>
+    <table class="table">
+        <tr>
+            <th>
+                Bank Name
+            </th>
+            <th>
+                Transactions
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var bankItem in Model.Banks)
+        { 
+            @Html.HiddenFor(modelItem => bankItem.BankID)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => bankItem.BankName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => bankItem.Expenses.ToList().Count)
+                </td>
+                <td>
+                    <a class="btn btn-danger" href='@Url.Action("Delete", "Bank", new { id = @bankItem.BankID, userId = Model.UserID })'>Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        alert("hi");
+    });
+</script>
+
