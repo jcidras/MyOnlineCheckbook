@@ -12,10 +12,7 @@
     @Html.ActionLink("Edit?", "Edit", "Home")
 </div>
 
-@using (Html.BeginForm("Create", "Bank", FormMethod.Get))
-{ 
-    <input type="submit" class="btn btn-default" value="Add Bank" />
-}
+@Html.ActionLink("Add Bank","Create", "Bank", new { id = @Model.UserID }, new { @class = "btn btn-default" })
 
 <div class="col-md-4">
     <h4>Banks</h4>

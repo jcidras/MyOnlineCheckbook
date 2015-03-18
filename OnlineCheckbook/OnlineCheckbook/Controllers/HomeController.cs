@@ -24,12 +24,13 @@ namespace OnlineCheckbook.Controllers
             return View();
         }
 
-        public ActionResult Account(User user)
+        public ActionResult Account(int? id)
         {
-            if (user == null)
+            if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("ErrorPage");
             }
+            var user = db.Users.Find(id);
             return View(user);
         }
 
@@ -39,7 +40,7 @@ namespace OnlineCheckbook.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Account(int? id)
+        public ActionResult AccountPost(int? id)
         {
             if (id == null)
             {
@@ -60,7 +61,7 @@ namespace OnlineCheckbook.Controllers
                 ModelState.AddModelError("", "Either username or password is incorrect. Please try again.");
                 return View(user);
             }
-            return View("Account", tempUser);
+            return RedirectToAction("Account", new { id = tempUser.UserID });
         }
     }
 }

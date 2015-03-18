@@ -7,7 +7,7 @@ namespace OnlineCheckbook.Models
     {
         public int BankID { get; set; }
 
-        public int UserID { get; set; }
+        public int? UserID { get; set; }
 
         public string BankName { get; set; }
 

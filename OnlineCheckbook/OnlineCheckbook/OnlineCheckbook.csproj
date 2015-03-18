@@ -916,6 +916,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BankController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\BankContext.cs" />
     <Compile Include="DAL\BankInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -932,6 +933,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Account.cshtml" />
     <Content Include="Views\Bank\Create.cshtml" />
+    <Content Include="Views\Shared\ErrorPage.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -6,7 +6,7 @@ namespace OnlineCheckbook.Models
     public class User
     {
         // Primary Key
-        public int UserID { get; set; }
+        public int? UserID { get; set; }
 
         public string Username { get; set; }
 

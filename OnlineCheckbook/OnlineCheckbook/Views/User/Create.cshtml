@@ -1,0 +1,45 @@
+﻿@model OnlineCheckbook.Models.User
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "User", FormMethod.Post, new { id = "frmCreateUser" }))
+{ 
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("Username:")
+            @Html.TextBoxFor(modelItem => modelItem.Username, new { @class = "form-control" })
+        </div>
+        <div class="form-group" id="passGroup">
+            @Html.Label("Password:")
+            @Html.PasswordFor(modelItem => modelItem.Password, new { @class = "form-control", id = "pass" })
+        </div>
+        <div class="form-group" id="confPassGroup">
+            @Html.Label("Verify Password:")
+            @Html.PasswordFor(modelItem => modelItem.Password, new { @class = "form-control", id = "confPass" })
+        </div>
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+}
+
+<script type="text/javascript">
+    $('#frmCreateUser').submit(function () {
+        var isValid = true;
+        var pass = $("#pass").val();
+        var confPass = $("#confPass").val();
+        if (pass !== confPass) {
+            if ($("#confPassError").length < 1) {
+                $("#confPassGroup").append('<p id="confPassError" style="color:Red">Passwords do not match</p>');
+            }
+            if ($("#passError").length < 1) {
+                $("#passGroup").append('<p id="passError" style="color:Red">Passwords do not match</p>');
+            }
+            isValid = false;
+        }
+        return isValid;
+    });
+</script>
+
