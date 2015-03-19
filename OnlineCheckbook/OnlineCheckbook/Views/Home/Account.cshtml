@@ -9,7 +9,7 @@
     <div>
         Account : @Html.DisplayFor(modelItem => modelItem.Username)
     </div>    
-    @Html.ActionLink("Edit?", "Edit", "Home")
+    @Html.ActionLink("Edit?", "Edit", "User", new { id = Model.UserID }, new { @class = "btn btn-default" })
 </div>
 
 @Html.ActionLink("Add Bank","Create", "Bank", new { id = @Model.UserID }, new { @class = "btn btn-default" })

@@ -45,5 +45,35 @@ namespace OnlineCheckbook.Controllers
                                 && u.Password == user.Password).Single().UserID 
                 });
         }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                View("ErrorPage");
+            }
+            var user = db.Users.Find(id);
+            return View(user);
+        }
+
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPost(int id)
+        {
+            var user = db.Users.Find(id);
+            if (TryUpdateModel(user, "",
+                new string[] { "Username, Password" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
+            }    
+            return RedirectToAction("Account", "Home", new { id = id });
+        }
     }
 }
