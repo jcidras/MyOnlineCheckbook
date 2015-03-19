@@ -1,0 +1,76 @@
+﻿@model OnlineCheckbook.Models.User
+@using OnlineCheckbook.Models
+@{
+    ViewBag.Title = "Profile";
+}
+
+<div class="col-md-4">
+    <h4>Account Info</h4>
+    <div>
+        Account : @Html.DisplayFor(modelItem => modelItem.Username)
+    </div>    
+    @Html.ActionLink("Edit?", "Edit", "User", new { id = Model.UserID }, new { @class = "btn btn-default" })
+</div>
+
+
+<div class="col-md-4">
+    @Html.ActionLink("Add Bank", "Create", "Bank", new { id = @Model.UserID }, new { @class = "btn btn-default" })
+    <h4>Banks</h4>
+    <table class="table">
+        <tr>
+            <th>
+                Bank Name
+            </th>
+            <th>
+                Transactions
+            </th>
+            <th>
+                Current Balance
+            </th>
+            <th>
+                Total Withdrawls
+            </th>
+            <th>
+                Total Deposits
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var bankItem in Model.Banks)
+        { 
+            @Html.HiddenFor(modelItem => bankItem.BankID)
+            <tr>
+                <td>
+                    @Html.ActionLink(bankItem.BankName, "Index", "Bank", new { id = bankItem.BankID }, new { })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => bankItem.Expenses.ToList().Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => bankItem.CurrentBalance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => bankItem.TotalWithdrawls)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => bankItem.TotalDeposits)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", "Bank", new { id = @bankItem.BankID, userId = @bankItem.UserID }, new { @class = "btn btn-danger" })
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Bank", new { id = @bankItem.BankID }, new { @class = "btn btn-default" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<script type="text/javascript">
+    $('.btn-danger').click(function (e) {
+        if (!confirm('Do you wish to delete this bank?')) {
+            e.preventDefault();
+        }        
+    });
+</script>
+

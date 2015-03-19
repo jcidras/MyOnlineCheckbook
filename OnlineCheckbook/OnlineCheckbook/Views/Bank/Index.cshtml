@@ -1,0 +1,81 @@
+﻿@model OnlineCheckbook.Models.Bank
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    @Html.ActionLink("Back to Profile", "Profile", "Home", new { id = Model.UserID }, new { @class = "btn btn-default" })
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Bank Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankName)
+        </dd>
+
+        <dt>
+            @Html.Label("Total Withdrawls")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalWithdrawls)
+        </dd>
+
+        <dt>
+            @Html.Label("Total Deposits")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalDeposits)
+        </dd>
+
+        <dt>
+            @Html.Label("Current Balance")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentBalance)
+        </dd>
+    </dl>
+    @Html.ActionLink("Add Expense", "Create", "Expense", new { id = Model.BankID }, new { @class = "btn btn-default" })
+    <div class="col-md-4">
+        <table class="table">
+            <tr>
+                <th>
+                    Transaction ID
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+            @foreach (var transaction in Model.Expenses)
+            { 
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => transaction.ExpenseID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => transaction.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => transaction.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => transaction.Date)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

@@ -15,9 +15,14 @@ namespace OnlineCheckbook.Controllers
     {
         private BankContext db = new BankContext();
         // GET: Bank
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Bank bank = db.Banks.Find(id);
+            return View(bank);
         }
 
         public ActionResult Create(int? id)
@@ -41,7 +46,7 @@ namespace OnlineCheckbook.Controllers
                 {
                     db.Banks.Add(bank);
                     db.SaveChanges();
-                    return RedirectToAction("Account", "Home", new { id = bank.UserID });
+                    return RedirectToAction("Profile", "Home", new { id = bank.UserID });
                 }
             }
             catch (Exception)
@@ -50,19 +55,20 @@ namespace OnlineCheckbook.Controllers
             return View(bank);
         }
 
-        public ActionResult Edit(Bank bank)
+        public ActionResult Edit(int? id)
         {
+            if (id == null)
+            {
+                View("ErrorPage");
+            }
+            var bank = db.Banks.Find(id);
             return View(bank);
         }
 
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? bankID)
-        {
-            if (bankID == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+        public ActionResult EditPost(int bankID)
+        {            
             var bankToUpdate = db.Banks.Find(bankID);
             if (TryUpdateModel(bankToUpdate, "",
                 new string[] { "BankName" }))
@@ -74,9 +80,10 @@ namespace OnlineCheckbook.Controllers
                 catch (Exception)
                 {
                     ModelState.AddModelError("", "Unable to update your bank. Please try again later.");
+                    return View(bankToUpdate);
                 }
             }
-            return RedirectToAction("Account", "Home", new { id = bankToUpdate.UserID });
+            return RedirectToAction("Profile", "Home", new { id = bankToUpdate.UserID });
         }
 
         public ActionResult Delete(int id, int userId)
@@ -92,7 +99,7 @@ namespace OnlineCheckbook.Controllers
                 
                 throw;
             }
-            return RedirectToAction("Account", "Home", new { id = userId });
+            return RedirectToAction("Profile", "Home", new { id = userId });
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model OnlineCheckbook.Models.User
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Profile - Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,10 +15,10 @@
         </div>
         <div class="form-group">
             @Html.Label("Password")
-            @Html.PasswordFor(modelItem => modelItem.Password, new { @class = "form-control" })
+            @Html.PasswordFor(modelItem => modelItem.Password, new { @class = "form-control", @value = Model.Password })
         </div>
         <input type="submit" value="Update" class="btn btn-default" />
-        @Html.ActionLink("Cancel", "Account", "Home", new { id = Model.UserID }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Cancel", "Profile", "Home", new { id = Model.UserID }, new { @class = "btn btn-default" })
     </div>
 }
 

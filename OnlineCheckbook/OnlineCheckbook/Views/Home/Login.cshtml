@@ -1,8 +1,14 @@
 ﻿@model OnlineCheckbook.Models.User
 
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 @using (Html.BeginForm("Login", "Home"))
 { 
     @Html.AntiForgeryToken()
+    @Html.ValidationMessage("", new { @class = "text-danger" })
     <div class="form-horizontal">
         <div class="form-group">            
             @Html.Label("Username:")
@@ -14,7 +20,7 @@
         </div>   
         <input type="submit" value="Login" class="btn btn-default" />
         <br />
-        @Html.ActionLink("Don't have an account?", "Create", "Home")
+        @Html.ActionLink("Don't have an profile?", "Create", "User")
     </div>
 }
 

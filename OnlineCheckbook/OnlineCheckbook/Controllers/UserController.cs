@@ -39,7 +39,7 @@ namespace OnlineCheckbook.Controllers
             {
                 return View();
             }
-            return RedirectToAction("Account", "Home", 
+            return RedirectToAction("Profile", "Home", 
                 new { 
                         id = db.Users.Where(u => u.Username == user.Username 
                                 && u.Password == user.Password).Single().UserID 
@@ -73,7 +73,7 @@ namespace OnlineCheckbook.Controllers
 
                 }
             }    
-            return RedirectToAction("Account", "Home", new { id = id });
+            return RedirectToAction("Profile", "Home", new { id = id });
         }
     }
 }

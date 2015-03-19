@@ -19,12 +19,8 @@ namespace OnlineCheckbook.Controllers
             return View();
         }
 
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        public ActionResult Account(int? id)
+        [ActionName("Profile")]
+        public ActionResult UserProfile(int? id)
         {
             if (id == null)
             {
@@ -34,34 +30,25 @@ namespace OnlineCheckbook.Controllers
             return View(user);
         }
 
-        /// <summary>
-        /// This method is by coming back from a different controller
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult AccountPost(int? id)
+        public ActionResult Login()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var user = db.Users.Find(id);
-            return View(user);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login([Bind(Include="Username,Password")] User user)
-        {     
-            var tempUser = db.Users.Where(u => u.Username == user.Username 
-                && u.Password == user.Password).Single();        
-            if (tempUser == null)
+        {
+            try
             {
-                ModelState.AddModelError("", "Either username or password is incorrect. Please try again.");
-                return View(user);
+                var tempUser = db.Users.Where(u => u.Username == user.Username && u.Password == user.Password).Single();
+                return RedirectToAction("Profile", new { id = tempUser.UserID });
             }
-            return RedirectToAction("Account", new { id = tempUser.UserID });
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Either username or password is incorrect. Please try again.");                
+            }
+            return View(user);
         }
     }
 }

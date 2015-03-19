@@ -31,7 +31,7 @@ namespace OnlineCheckbook.DAL
 
             var expenses = new List<Expense> 
             { 
-                new Expense {BankID=1, ExpenseID=1, ExpenseAmount=12.34, ExpenseDate=DateTime.Parse("2015-01-01"), ExpenseDescription="Buying Pizza"}
+                new Expense {BankID=1, ExpenseID=1, Amount=12.34, Date=DateTime.Parse("2015-01-01"), Description="Buying Pizza"}
             };
 
             expenses.ForEach(e => context.Expenses.Add(e));
