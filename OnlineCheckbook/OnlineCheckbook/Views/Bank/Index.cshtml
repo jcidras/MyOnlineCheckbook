@@ -41,7 +41,8 @@
             @Html.DisplayFor(model => model.CurrentBalance)
         </dd>
     </dl>
-    @Html.ActionLink("Add Expense", "Create", "Expense", new { id = Model.BankID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Add Expense", "Withdrawl", "Expense", new { id = Model.BankID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Add Deposit", "Deposit", "Expense", new { id = Model.BankID }, new { @class = "btn btn-default" })
     <div class="col-md-4">
         <table class="table">
             <tr>

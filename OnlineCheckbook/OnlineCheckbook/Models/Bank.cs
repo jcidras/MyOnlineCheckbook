@@ -25,5 +25,17 @@ namespace OnlineCheckbook.Models
         public double CurrentBalance { get; set; }
 
         public virtual ICollection<Expense> Expenses { get; set; }
+
+        public void AddDeposit(Expense expense)
+        {
+            this.CurrentBalance += expense.Amount;
+            this.TotalDeposits += expense.Amount;
+        }
+
+        public void AddWithdrawl(Expense expense)
+        {
+            this.CurrentBalance -= expense.Amount;
+            this.TotalWithdrawls -= expense.Amount;
+        }
     }
 }

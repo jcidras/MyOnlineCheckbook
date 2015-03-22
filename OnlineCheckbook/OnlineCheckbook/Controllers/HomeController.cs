@@ -42,6 +42,7 @@ namespace OnlineCheckbook.Controllers
             try
             {
                 var tempUser = db.Users.Where(u => u.Username == user.Username && u.Password == user.Password).Single();
+                Session["UserId"] = tempUser.UserID;
                 return RedirectToAction("Profile", new { id = tempUser.UserID });
             }
             catch (Exception)

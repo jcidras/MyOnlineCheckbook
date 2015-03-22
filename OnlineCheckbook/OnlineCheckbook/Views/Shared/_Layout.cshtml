@@ -24,7 +24,7 @@
             <div class="navbar-collapse collapse navbar-left">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Profile", "Profile", "Home")</li>
+                    <li>@Html.ActionLink("Profile", "Profile", "Home", new { id = Session["UserId"] }, new { })</li>
                 </ul>
             </div>
             <div class="navbar-collapse collapse navbar-right">

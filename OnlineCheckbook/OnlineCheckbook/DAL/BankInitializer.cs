@@ -22,8 +22,8 @@ namespace OnlineCheckbook.DAL
 
             var banks = new List<Bank>
             {
-                new Bank {BankID=1, UserID=1, BankName="First National Bank of Leavenworth"},
-                new Bank {BankID=2, UserID=1, BankName="Horizon Credit Union"}
+                new Bank {BankID=1, UserID=1, BankName="Test Bank 1"},
+                new Bank {BankID=2, UserID=1, BankName="Test Bank 2"}
             };
 
             banks.ForEach(b => context.Banks.Add(b));
@@ -31,7 +31,7 @@ namespace OnlineCheckbook.DAL
 
             var expenses = new List<Expense> 
             { 
-                new Expense {BankID=1, ExpenseID=1, Amount=12.34, Date=DateTime.Parse("2015-01-01"), Description="Buying Pizza"}
+                new Expense {BankID=1, ExpenseID=1, Amount=12.50, Date=DateTime.Parse("2015-01-01"), Description="Buying Pizza"}
             };
 
             expenses.ForEach(e => context.Expenses.Add(e));

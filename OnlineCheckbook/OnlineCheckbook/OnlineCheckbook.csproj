@@ -939,7 +939,8 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Bank\Edit.cshtml" />
     <Content Include="Views\Bank\Index.cshtml" />
-    <Content Include="Views\Expense\Create.cshtml" />
+    <Content Include="Views\Expense\Withdrawl.cshtml" />
+    <Content Include="Views\Expense\Deposit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
