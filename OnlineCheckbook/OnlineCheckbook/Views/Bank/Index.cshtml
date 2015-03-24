@@ -16,67 +16,51 @@
         <dd>
             @Html.DisplayFor(model => model.BankName)
         </dd>
-
-        <dt>
-            @Html.Label("Total Withdrawls")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotalWithdrawls)
-        </dd>
-
-        <dt>
-            @Html.Label("Total Deposits")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotalDeposits)
-        </dd>
-
-        <dt>
-            @Html.Label("Current Balance")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CurrentBalance)
-        </dd>
+        
     </dl>
-    @Html.ActionLink("Add Expense", "Withdrawl", "Expense", new { id = Model.BankID }, new { @class = "btn btn-default" })
-    @Html.ActionLink("Add Deposit", "Deposit", "Expense", new { id = Model.BankID }, new { @class = "btn btn-default" })
-    <div class="col-md-4">
-        <table class="table">
+    
+    @Html.ActionLink("Add Account", "Create", "Account", new { id = Model.BankID }, new { @class = "btn btn-default" })
+
+    <h4>Accounts</h4>
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Current Balance
+            </th>
+            <th></th>
+            <th></th>                
+        </tr>
+        @if (Model.Accounts.Count == 0)
+        { 
             <tr>
-                <th>
-                    Transaction ID
-                </th>
-                <th>
-                    Amount
-                </th>
-                <th>
-                    Description
-                </th>
-                <th>
-                    Date
-                </th>
+                <td colspan="4">
+                    You have no accounts. Please add one!
+                </td>
             </tr>
-            @foreach (var transaction in Model.Expenses)
-            { 
+        }
+        else
+        { 
+            foreach (var account in Model.Accounts)
+            {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => transaction.ExpenseID)
+                        @Html.ActionLink(account.Name, "Index", "Account", new { id = account.Id }, new { @style = "text-decoration:none;" })
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => transaction.Amount)
+                        @Html.DisplayFor(modelItem => account.CurrentBalance)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => transaction.Description)
+                        @Html.ActionLink("Delete", "Delete", "Account", new { id = account.Id, bankId = account.BankId }, new { @class = "btn btn-danger" })
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => transaction.Date)
+                        @Html.ActionLink("Edit", "Edit", "Account", new { id = account.Id }, new { @class = "btn btn-default" })
                     </td>
                 </tr>
             }
-        </table>
-    </div>
+        }            
+    </table>    
 </div>
 

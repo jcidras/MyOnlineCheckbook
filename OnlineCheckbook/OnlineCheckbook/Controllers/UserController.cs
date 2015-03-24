@@ -70,7 +70,7 @@ namespace OnlineCheckbook.Controllers
                 }
                 catch (Exception)
                 {
-
+                    ModelState.AddModelError("", "Unable to update profile. Please try again later.");
                 }
             }    
             return RedirectToAction("Profile", "Home", new { id = id });

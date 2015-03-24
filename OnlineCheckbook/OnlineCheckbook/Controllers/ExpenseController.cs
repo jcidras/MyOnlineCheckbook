@@ -30,20 +30,20 @@ namespace OnlineCheckbook.Controllers
             {
                 View("ErrorPage");
             }
-            var expense = new Expense() { BankID = id };
+            var expense = new Expense() { AccountID = id };
             return View(expense);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Withdrawl([Bind(Include="BankID, Amount, Description, Date")] Expense expense)
+        public ActionResult Withdrawl([Bind(Include="AccountID, Amount, Description, Date")] Expense expense)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var bank = db.Banks.Find(expense.BankID);
-                    bank.AddWithdrawl(expense);
+                    var account = db.Accounts.Find(expense.AccountID);
+                    account.AddWithdraw(expense);
                     db.Expenses.Add(expense);
                     db.SaveChanges();
                 }
@@ -52,7 +52,7 @@ namespace OnlineCheckbook.Controllers
                     return View(expense);
                 }
             }
-            return RedirectToAction("Index", "Bank", new { id = expense.BankID });
+            return RedirectToAction("Index", "Bank", new { id = expense.AccountID });
         }
 
         /// <summary>
@@ -66,20 +66,20 @@ namespace OnlineCheckbook.Controllers
             {
                 View("ErrorPage");
             }
-            var expense = new Expense() { BankID = id };
+            var expense = new Expense() { AccountID = id };
             return View(expense);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Deposit([Bind(Include = "BankID, Amount, Description, Date")] Expense expense)
+        public ActionResult Deposit([Bind(Include = "AccountID, Amount, Description, Date")] Expense expense)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var bank = db.Banks.Find(expense.BankID);
-                    bank.AddDeposit(expense);
+                    var account = db.Accounts.Find(expense.AccountID);
+                    account.AddDeposit(expense);
                     db.Expenses.Add(expense);
                     db.SaveChanges();
                 }
@@ -88,7 +88,7 @@ namespace OnlineCheckbook.Controllers
                     return View(expense);
                 }
             }
-            return RedirectToAction("Index", "Bank", new {id = expense.BankID});
+            return RedirectToAction("Index", "Bank", new {id = expense.AccountID});
         }
     }
 }

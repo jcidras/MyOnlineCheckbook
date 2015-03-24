@@ -22,9 +22,23 @@ namespace OnlineCheckbook.Controllers
         [ActionName("Profile")]
         public ActionResult UserProfile(int? id)
         {
-            if (id == null)
+            // User must login first, don't want anyone to 
+            // get on someone's profile.
+            var sessionUserId = Session["UserId"];
+            if (sessionUserId != null)
             {
-                return View("ErrorPage");
+                if (Int32.Parse(sessionUserId.ToString()) != id)
+                {
+                    UserProfile(id = Int32.Parse(sessionUserId.ToString()));
+                }
+                else if (id == null)
+                {
+                    return View("Login");
+                }
+            }
+            else
+            {
+                return View("Login");
             }
             var user = db.Users.Find(id);
             return View(user);

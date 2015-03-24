@@ -7,9 +7,9 @@ namespace OnlineCheckbook.Models
     {
         public int? ExpenseID { get; set; }
 
-        public int? BankID { get; set; }
+        public int? AccountID { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C2}")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         [DataType(DataType.Currency)]
         public double Amount { get; set; }
 

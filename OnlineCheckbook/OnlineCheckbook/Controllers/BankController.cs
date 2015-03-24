@@ -96,8 +96,7 @@ namespace OnlineCheckbook.Controllers
             }
             catch (Exception)
             {
-                
-                throw;
+                ModelState.AddModelError("", "Unable to delete bank. Please try again later.");
             }
             return RedirectToAction("Profile", "Home", new { id = userId });
         }

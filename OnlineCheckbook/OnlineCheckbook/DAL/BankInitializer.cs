@@ -27,15 +27,7 @@ namespace OnlineCheckbook.DAL
             };
 
             banks.ForEach(b => context.Banks.Add(b));
-            context.SaveChanges();
-
-            var expenses = new List<Expense> 
-            { 
-                new Expense {BankID=1, ExpenseID=1, Amount=12.50, Date=DateTime.Parse("2015-01-01"), Description="Buying Pizza"}
-            };
-
-            expenses.ForEach(e => context.Expenses.Add(e));
-            context.SaveChanges();
+            context.SaveChanges();            
         }
     }
 }

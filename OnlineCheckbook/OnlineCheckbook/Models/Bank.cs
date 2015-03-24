@@ -12,30 +12,6 @@ namespace OnlineCheckbook.Models
 
         public string BankName { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C2}")]
-        [DataType(DataType.Currency)]
-        public double TotalWithdrawls { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:C2}")]
-        [DataType(DataType.Currency)]
-        public double TotalDeposits { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:C2}")]
-        [DataType(DataType.Currency)]
-        public double CurrentBalance { get; set; }
-
-        public virtual ICollection<Expense> Expenses { get; set; }
-
-        public void AddDeposit(Expense expense)
-        {
-            this.CurrentBalance += expense.Amount;
-            this.TotalDeposits += expense.Amount;
-        }
-
-        public void AddWithdrawl(Expense expense)
-        {
-            this.CurrentBalance -= expense.Amount;
-            this.TotalWithdrawls -= expense.Amount;
-        }
+        public virtual ICollection<Account> Accounts { get; set; }
     }
 }
