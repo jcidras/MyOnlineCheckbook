@@ -4,19 +4,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="col-md-10">
-    <h2>Hey there! You must be lost?</h2>
-    <h2>Don't be sad! :)</h2>
-</div>
-
-<div class="col-md-10">
-    <p>
-        Need to login? Click this @Html.ActionLink("link", "Login", "Home")
-    </p>
-    <p>
-        Perhaps a new user or just trying to break this website?
-        You can register by clicking this @Html.ActionLink("link", "Create", "User")
-    </p>
+<div>
+    <dl class="dl-horizontal">
+        <dd>
+            <h2>
+                Hey there! You must be lost?
+            </h2>
+        </dd>
+        <dd>
+            <h2>
+                Don't be sad! :)
+            </h2>
+        </dd>
+        <dd>
+            Need to login? Click this @Html.ActionLink("link", "Signin", "User")
+        </dd>
+        <dd>
+            Perhaps a new user or just trying to break this website?
+            You can register by clicking this @Html.ActionLink("link", "AddUser", "User")
+        </dd>
+    </dl>            
 </div>
 
 

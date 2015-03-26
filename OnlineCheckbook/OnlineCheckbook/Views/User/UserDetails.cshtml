@@ -1,0 +1,89 @@
+﻿@model OnlineCheckbook.Models.User
+@using OnlineCheckbook.Models
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Pofile Info</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Profile Of
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => modelItem.Username)
+        </dd>
+        <dt>
+            @Html.ActionLink("Edit?", "EditUser", new { }, new { @class = "btn btn-default" })
+        </dt> 
+        <dd>
+            @Html.ActionLink("Delete?", "DeleteUser", new { }, new { @class = "btn btn-danger", @id = "btnDeleteProfile" })
+        </dd>
+    </dl>
+
+    @Html.ActionLink("Add Bank", "AddBank", new { }, new { @id = "btnCreateBank", @class = "btn btn-default" })
+    
+    <h4>Banks</h4>    
+    <table class="table">
+        <tr>
+            <th>
+                Bank Name
+            </th>
+            <th>
+                Accounts
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        @if (Model.Banks.Count == 0)
+        {
+            <tr>
+                <td colspan="7">
+                    You have no banks. Please add one!
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var bankItem in Model.Banks)
+            {
+                @Html.HiddenFor(modelItem => bankItem.BankID)
+                <tr>
+                    <td>
+                        @Html.ActionLink(bankItem.BankName, "BankDetails", new { id = bankItem.BankID }, new { @id = "btnGoToBankDetails" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => bankItem.Accounts.ToList().Count)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteBank", new { id = @bankItem.BankID}, new { @class = "btn btn-danger" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditBank", new { id = @bankItem.BankID }, new { @class = "btn btn-default" })
+                    </td>
+                </tr>
+            }
+        }
+    </table>   
+    <div id="error">
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+    </div> 
+</div>
+
+
+<script type="text/javascript">
+    $("#btnDeleteProfile").click(function (e) {
+        if (!confirm('Do you wish to delete your profile?')) {
+            e.preventDefault();
+        }
+    });
+    
+    $('.btn-danger').click(function (e) {
+        if (!confirm('Do you wish to delete this bank?')) {
+            e.preventDefault();
+        }        
+    });    
+</script>
+

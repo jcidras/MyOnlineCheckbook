@@ -1,0 +1,68 @@
+﻿@model OnlineCheckbook.Models.Bank
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>    
+    <hr />
+    <h2>
+        Bank Details
+    </h2>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Bank Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankName)
+        </dd>
+        
+    </dl>
+    
+    @Html.ActionLink("Add Account", "AddAccount", new { id = Model.BankID }, new { @class = "btn btn-default" })
+
+    <h4>Accounts</h4>
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Current Balance
+            </th>
+            <th></th>
+            <th></th>                
+        </tr>
+        @if (Model.Accounts.Count == 0)
+        { 
+            <tr>
+                <td colspan="4">
+                    You have no accounts. Please add one!
+                </td>
+            </tr>
+        }
+        else
+        { 
+            foreach (var account in Model.Accounts)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(account.Name, "AccountDetails", new { id = account.Id }, new { @style = "text-decoration:none;" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => account.CurrentBalance)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteAccount", new { id = account.Id, bankId = account.BankId }, new { @class = "btn btn-danger" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditAccount", new { id = account.Id }, new { @class = "btn btn-default" })
+                    </td>
+                </tr>
+            }
+        }            
+    </table>    
+</div>
+

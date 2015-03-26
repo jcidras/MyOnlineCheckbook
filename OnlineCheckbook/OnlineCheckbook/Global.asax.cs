@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebMatrix.WebData;
 using System.Web.Routing;
 
 namespace OnlineCheckbook
@@ -13,6 +12,8 @@ namespace OnlineCheckbook
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-        }
+            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            AuthConfig.RegisterAuth();            
+        }        
     }
 }
