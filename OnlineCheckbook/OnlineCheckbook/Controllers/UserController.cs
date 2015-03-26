@@ -102,7 +102,7 @@ namespace OnlineCheckbook.Controllers
             return View(user);
         }
 
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditUserPost(User user)
         { 
