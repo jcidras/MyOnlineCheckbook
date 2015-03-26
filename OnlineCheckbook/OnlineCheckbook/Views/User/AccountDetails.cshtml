@@ -34,8 +34,8 @@
         </dd>
     </dl>
 
-    @Html.ActionLink("Add Expense", "Withdrawl", "Expense", new { id = Model.Id }, new { @class = "btn btn-default" })
-    @Html.ActionLink("Add Deposit", "Deposit", "Expense", new { id = Model.Id }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Add Expense", "Withdrawal", new { id = Model.Id }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Add Deposit", "Deposit", new { id = Model.Id }, new { @class = "btn btn-default" })
     
     <h4>Expenses</h4>
     <table class="table">
@@ -59,7 +59,7 @@
             {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => transaction.ExpenseID)
+                    @Html.ActionLink("Link to Details", "ExpenseDetails", new { id = transaction.ExpenseID }, new { @class = "btn btn-link"})
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => transaction.Amount)

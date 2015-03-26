@@ -189,7 +189,7 @@
     <Content Include="Views\User\EditUser.cshtml" />
     <Content Include="Views\User\EditBank.cshtml" />
     <Content Include="Views\User\BankDetails.cshtml" />
-    <Content Include="Views\User\Withdrawl.cshtml" />
+    <Content Include="Views\User\Withdrawal.cshtml" />
     <Content Include="Views\User\Deposit.cshtml" />
     <Content Include="Views\User\AccountDetails.cshtml" />
     <Content Include="Views\User\AddAccount.cshtml" />

@@ -9,7 +9,7 @@
 <div id="errorMessage">
     @Html.ValidationMessage("", new { @class = "text-danger" })
 </div>
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Deposit", "User", FormMethod.Post)) 
 {    
     @Html.AntiForgeryToken()
     

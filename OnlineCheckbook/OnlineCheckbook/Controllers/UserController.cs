@@ -70,11 +70,11 @@ namespace OnlineCheckbook.Controllers
         {
             try
             {
-                if (0 == db.Users.Select(x => x.Username == user.Username).Count())
+                if (0 == (from users in db.Users where users.Username == user.Username select users).AsEnumerable().ToList().Count())
                 {
                     db.Users.Add(user);
                     db.SaveChanges();
-                    Session["UserId"] = db.Users.Where(x => x.Username == user.Username &&
+                    Session[SessionVariable.USER_ID] = db.Users.Where(x => x.Username == user.Username &&
                                                                            x.Password == user.Password).Single().UserID;
                 }
                 else
@@ -370,7 +370,7 @@ namespace OnlineCheckbook.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Withdrawl(int? id)
+        public ActionResult Withdrawal(int? id)
         {
             var account = db.Accounts.Find(id);
             if (account == null || !Authenication.IsAuthorized(account, Session[SessionVariable.USER_ID]))
@@ -382,7 +382,7 @@ namespace OnlineCheckbook.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Withdrawl([Bind(Include = "AccountID, Amount, Description, Date")] Expense expense)
+        public ActionResult Withdrawal([Bind(Include = "AccountID, Amount, Description, Date")] Expense expense)
         {
             if (ModelState.IsValid)
             {
@@ -398,7 +398,7 @@ namespace OnlineCheckbook.Controllers
                     return View(expense);
                 }
             }
-            return RedirectToAction("BankDetails");
+            return RedirectToAction("AccountDetails", new { id = expense.AccountID });
         }
 
         /// <summary>
@@ -435,7 +435,7 @@ namespace OnlineCheckbook.Controllers
                     return View(expense);
                 }
             }
-            return RedirectToAction("BankDetails");
+            return RedirectToAction("AccountDetails", new { id = expense.AccountID });
         }  
         #endregion
     }
